@@ -20,11 +20,8 @@ public class Application {
 	 * @throws SQLException 
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
-		// TODO Auto-generated method stub
 		
-
-		
-		CSVParser reader = new CSVParser();
+		CSVParser reader = new CSVParser("C:\\Users\\Shreyas\\Documents\\GitHub\\LogParser\\Supervisor");
 		reader.init();
 
 	}

@@ -11,8 +11,8 @@ public class CSVParser {
 	
 	CSVReader reader = null;
     
-	CSVParser() throws FileNotFoundException{
-		reader = new CSVReader(new FileReader("C:\\Users\\Shreyas\\Documents\\GitHub\\LogParser\\Supervisor"),'\t');
+	CSVParser(String path) throws FileNotFoundException{
+		reader = new CSVReader(new FileReader(path),'\t');
 	}
 	
 	public String[] getNextLine() throws IOException{
@@ -30,11 +30,17 @@ public class CSVParser {
 	public void init() throws IOException, SQLException{
 		
 		ConnectionManager cm = new ConnectionManager();
-		
-		String[] nextLine = this.getNextLine();
-		
+		String[] nextLine = null;
 		cm.resetDatabase();
-		cm.insert(nextLine);
+		int counter = 0;
+		
+		while((nextLine = this.getNextLine())!=null){
+			
+			cm.insert(nextLine);
+			System.out.println("Success"+" "+counter);
+			counter ++;
+		}
+		
 		cm.query();
 	}
 

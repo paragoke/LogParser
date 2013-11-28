@@ -27,8 +27,7 @@ public class ConnectionManager {
 	
 	public void insert(String[] data) throws SQLException{
 		preparedStatement = connect.prepareStatement("insert into  log values (?, ?, ?, ?, ? , ?, ?)");
-		      // "myuser, webpage, datum, summary, COMMENTS from FEEDBACK.COMMENTS");
-		      // Parameters start with 1
+
 		preparedStatement.setInt(1, trueid);
 		trueid ++;
 		preparedStatement.setInt(2, new Integer(data[0]));
