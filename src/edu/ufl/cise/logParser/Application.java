@@ -23,6 +23,8 @@ public class Application {
 		
 		CSVParser reader = new CSVParser("C:\\Users\\Shreyas\\Documents\\GitHub\\LogParser\\Supervisor");
 		reader.init();
+		reader.parseNewFile("C:\\Users\\Shreyas\\Documents\\GitHub\\LogParser\\$xb");
+		reader.displayLogs();
 
 	}
 

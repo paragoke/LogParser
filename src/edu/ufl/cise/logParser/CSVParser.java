@@ -10,9 +10,11 @@ import au.com.bytecode.opencsv.CSVReader;
 public class CSVParser {
 	
 	CSVReader reader = null;
+	ConnectionManager cm = new ConnectionManager();
     
-	CSVParser(String path) throws FileNotFoundException{
+	CSVParser(String path) throws FileNotFoundException, SQLException{
 		reader = new CSVReader(new FileReader(path),'\t');
+		
 	}
 	
 	public String[] getNextLine() throws IOException{
@@ -29,7 +31,7 @@ public class CSVParser {
 	
 	public void init() throws IOException, SQLException{
 		
-		ConnectionManager cm = new ConnectionManager();
+
 		String[] nextLine = null;
 		cm.resetDatabase();
 		int counter = 0;
@@ -46,6 +48,33 @@ public class CSVParser {
 		}
 		
 		cm.executeBatch();
+		cm.query();  //remove after debugging
+	}
+	
+	public void parseNewFile(String path) throws IOException, SQLException {
+		
+		reader = new CSVReader(new FileReader(path),'\t');
+		int counter = 0;
+		
+		String[] nextLine;
+		
+		while((nextLine = this.getNextLine())!=null){
+			
+			cm.insert(nextLine);
+			System.out.println("Success"+" "+counter);
+			if(counter==999){
+				cm.executeBatch();
+				counter = -1;
+			}
+			counter ++;
+		}
+		
+		cm.executeBatch();
+		cm.query();//remove after debugging
+		
+	}
+	
+	public void displayLogs() throws SQLException {
 		cm.query();
 	}
 
