@@ -16,17 +16,20 @@ public class ConnectionManager {
 	private PreparedStatement preparedStatement = null;
 	private ResultSet resultSet = null;
 	
-	private String dbURL = "jdbc:mysql://localhost:3306/Dos4?";
-	private String usernamepasswd = "user=shreyas&password=abcd";
+	private String dbURL = "jdbc:mysql://localhost:3306/Dos4?rewriteBatchedStatements=true";
+	private String username = "shreyas";
+	private String password = "abcd";
 	
 	private int trueid = 0;
 	
 	ConnectionManager() throws SQLException{
-		connect = DriverManager.getConnection(dbURL + usernamepasswd );
+		connect = DriverManager.getConnection(dbURL,username,password );
+		connect.setAutoCommit(false);
+		preparedStatement = connect.prepareStatement("insert into  log values (?, ?, ?, ?, ? , ?, ?)");
+		preparedStatement.clearBatch();
 	}
 	
 	public void insert(String[] data) throws SQLException{
-		preparedStatement = connect.prepareStatement("insert into  log values (?, ?, ?, ?, ? , ?, ?)");
 
 		preparedStatement.setInt(1, trueid);
 		trueid ++;
@@ -37,7 +40,14 @@ public class ConnectionManager {
 		preparedStatement.setString(6, data[4]);
 		preparedStatement.setString(7, data[5]);
 		
-		preparedStatement.executeUpdate();
+		preparedStatement.addBatch();
+		
+	}
+	
+	public void executeBatch() throws SQLException {
+		
+		preparedStatement.executeBatch();
+		connect.commit();
 		
 	}
 	

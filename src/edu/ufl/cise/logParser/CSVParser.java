@@ -38,9 +38,14 @@ public class CSVParser {
 			
 			cm.insert(nextLine);
 			System.out.println("Success"+" "+counter);
+			if(counter==999){
+				cm.executeBatch();
+				counter = -1;
+			}
 			counter ++;
 		}
 		
+		cm.executeBatch();
 		cm.query();
 	}
 
