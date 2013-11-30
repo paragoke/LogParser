@@ -48,7 +48,7 @@ public class CSVParser {
 		}
 		
 		cm.executeBatch();
-		cm.query();  //remove after debugging
+		cm.queryall();  //remove after debugging
 	}
 	
 	public void parseNewFile(String path) throws IOException, SQLException {
@@ -70,12 +70,13 @@ public class CSVParser {
 		}
 		
 		cm.executeBatch();
-		cm.query();//remove after debugging
+		cm.queryall();//remove after debugging
+		//cm.clockquery();
 		
 	}
 	
 	public void displayLogs() throws SQLException {
-		cm.query();
+		cm.queryall();
 	}
 
 }
