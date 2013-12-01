@@ -21,9 +21,8 @@ public class Application {
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
 		
-		CSVParser reader = new CSVParser("C:\\Users\\Shreyas\\Documents\\GitHub\\LogParser\\Supervisor");
+		CSVParser reader = new CSVParser("C:\\Users\\Shreyas\\Documents\\GitHub\\LogParser\\logs");
 		reader.init();
-		reader.parseNewFile("C:\\Users\\Shreyas\\Documents\\GitHub\\LogParser\\$xb");
 		reader.displayLogs();
 
 	}

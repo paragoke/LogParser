@@ -29,6 +29,7 @@ public class ConnectionManager {
 		connect.setAutoCommit(false);
 		preparedStatement = connect.prepareStatement("insert into  log values (?, ?, ?, ?, ? , ?, ?)");
 		preparedStatement.clearBatch();
+		resetDatabase();
 	}
 	
 	public void insert(String[] data) throws SQLException{
